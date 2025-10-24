@@ -284,3 +284,4 @@ curl http://localhost:5173/api/examples/hello.poh
 
 MIT License - see LICENSE file for details
 # Trigger deployment
+# Add repo permission
