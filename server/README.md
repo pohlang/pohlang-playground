@@ -287,3 +287,4 @@ MIT License - see LICENSE file for details
 # Trigger deployment
 # Add repo permission
 # Add artifactregistry.repoAdmin permission
+# Repository created successfully!
