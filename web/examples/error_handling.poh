@@ -9,12 +9,12 @@ Write ""
 # Example 1: Age Validation
 Write "--- Age Validator ---"
 
-Make validate_age with age
-    If age < 0
+Make validate_age with age:
+    If age < 0:
         Write "Error: Age cannot be negative"
         Return none
     End
-    If age > 150
+    If age > 150:
         Write "Error: Age seems unrealistic"
         Return none
     End
@@ -22,54 +22,25 @@ Make validate_age with age
 End
 
 Set age1 to validate_age with 25
-If age1 is not none
-    Write "Valid age: " plus age1
+If age1 is not none:
+    Write "Valid age: " + age1
 End
 
 Set age2 to validate_age with 200
-If age2 is none
+If age2 is none:
     Write "Using default age: 0"
 End
 
 Write ""
 
-# Example 2: String Validation
-Write "--- String Validator ---"
-
-Make validate_email with email
-    Set has_at to contains email "@"
-    Set has_dot to contains email "."
-    
-    If not has_at
-        Write "Error: Email must contain @"
-        Return false
-    End
-    If not has_dot
-        Write "Error: Email must contain a domain"
-        Return false
-    End
-    Return true
-End
-
-Set email1 to "user@example.com"
-Set is_valid to validate_email with email1
-If is_valid
-    Write "Valid email: " plus email1
-End
-
-Set email2 to "invalid-email"
-Set is_valid2 to validate_email with email2
-
-Write ""
-
-# Example 3: Number Range Validation
+# Example 2: Number Range Validation
 Write "--- Range Validator ---"
 
-Make is_in_range with value, min, max
-    If value < min
+Make is_in_range with value, min, max:
+    If value < min:
         Return false
     End
-    If value > max
+    If value > max:
         Return false
     End
     Return true
@@ -77,19 +48,19 @@ End
 
 Set score to 85
 Set valid_score to is_in_range with score, 0, 100
-If valid_score
-    Write "Score " plus score plus " is valid (0-100)"
-Otherwise
+If valid_score:
+    Write "Score " + score + " is valid (0-100)"
+Otherwise:
     Write "Score out of range"
 End
 
 Write ""
 
-# Example 4: Safe Division
+# Example 3: Safe Division
 Write "--- Safe Division ---"
 
-Make safe_divide with a, b
-    If b is 0
+Make safe_divide with a, b:
+    If b == 0:
         Write "Error: Cannot divide by zero"
         Return none
     End
@@ -97,14 +68,67 @@ Make safe_divide with a, b
 End
 
 Set result1 to safe_divide with 10, 2
-If result1 is not none
-    Write "10 / 2 = " plus result1
+If result1 is not none:
+    Write "10 / 2 = " + result1
 End
 
 Set result2 to safe_divide with 10, 0
-If result2 is none
+If result2 is none:
     Write "Using default result: 0"
     Set result2 to 0
+End
+
+Write ""
+
+# Example 4: Grade Calculator
+Write "--- Grade Calculator ---"
+
+Make calculate_grade with score:
+    If score < 0 or score > 100:
+        Write "Invalid score: must be 0-100"
+        Return "Invalid"
+    End
+    If score >= 90:
+        Return "A"
+    Else If score >= 80:
+        Return "B"
+    Else If score >= 70:
+        Return "C"
+    Else If score >= 60:
+        Return "D"
+    Else:
+        Return "F"
+    End
+End
+
+Set grade1 to calculate_grade with 95
+Write "Score 95: Grade " + grade1
+
+Set grade2 to calculate_grade with 75
+Write "Score 75: Grade " + grade2
+
+Set grade3 to calculate_grade with 150
+# Shows error message but continues
+
+Write ""
+
+# Example 5: Even/Odd Validator
+Write "--- Even/Odd Checker ---"
+
+Make is_even with number:
+    Set remainder to number - ((number / 2) * 2)
+    If remainder == 0:
+        Return true
+    End
+    Return false
+End
+
+Set num to 42
+Set even to is_even with num
+If even:
+    Write num + " is even"
+Otherwise:
+    Write num + " is odd"
 End
 
 Write ""
