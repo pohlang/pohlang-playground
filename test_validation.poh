@@ -1,0 +1,17 @@
+Start Program
+
+Write "Testing validation"
+
+Make validate_age with age
+    If age < 0
+        Write "Error: Age cannot be negative"
+        Return none
+    End
+    Return age
+End
+
+Set age1 to validate_age with 25
+Write "Age1: "
+Write age1
+
+End Program

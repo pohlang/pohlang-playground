@@ -33,7 +33,13 @@ Use PohLang anywhere - from VS Code to Notepad, PowerShell to CMD, and everythin
 - ✅ Integrated terminal
 - ✅ One-click run (Ctrl+F5)
 - ✅ Bundled runtime (no separate install)
-- 
+- ✅ Full toolings for pohlang
+- ✅ Debugging tools
+- ✅ Code navigation
+- ✅ Integrated terminal
+- ✅ One-click run (Ctrl+F5)
+- ✅ Bundled runtime (no separate install)
+- ✅
 
 #### Quick Start
 ```bash

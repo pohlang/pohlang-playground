@@ -1,0 +1,21 @@
+Start Program
+
+Make validate_age with age
+    If age < 0
+        Return none
+    End
+    Return age
+End
+
+Set age1 to validate_age with 25
+If age1 is not none
+    Write "Valid age: "
+    Write age1
+End
+
+Set age2 to validate_age with -5
+If age2 is none
+    Write "Age2 is invalid"
+End
+
+End Program

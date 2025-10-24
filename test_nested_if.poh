@@ -1,0 +1,15 @@
+Start Program
+
+Set score to 85
+
+If score >= 90
+    Write "A"
+Otherwise
+    If score >= 80
+        Write "B"
+    Otherwise
+        Write "C"
+    End
+End
+
+End Program
