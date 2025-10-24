@@ -3,36 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PohLang Playground</title>
+  <title>PohLang Playground - Learn Natural Language Programming</title>
+  <meta name="description" content="Interactive playground for PohLang - a programming language that reads like natural English. Learn, experiment, and build with intuitive syntax.">
   <link rel="stylesheet" href="/styles.css"/>
 </head>
 <body>
+  <!-- Welcome Modal -->
+  <div id="welcomeModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Welcome to PohLang Playground! 🎉</h2>
+      <p><strong>PohLang</strong> is a programming language that reads like natural English, making coding accessible and intuitive.</p>
+      
+      <div class="welcome-section">
+        <h3>🚀 Quick Start</h3>
+        <ul>
+          <li>Choose an <strong>example</strong> from the dropdown or start typing</li>
+          <li>Press <kbd>Ctrl/Cmd+Enter</kbd> or click <strong>Run</strong></li>
+          <li>Your code is auto-saved locally (<kbd>Ctrl/Cmd+S</kbd>)</li>
+        </ul>
+      </div>
+
+      <div class="welcome-section">
+        <h3>💡 Key Features</h3>
+        <ul>
+          <li><strong>Natural Syntax:</strong> "Make a list of 1, 2, 3" instead of [1, 2, 3]</li>
+          <li><strong>Phrasal Operations:</strong> "a plus b" or symbolic "a + b"</li>
+          <li><strong>Familiar Concepts:</strong> Functions, loops, classes, web servers</li>
+        </ul>
+      </div>
+
+      <div class="welcome-section">
+        <h3>⌨️ Keyboard Shortcuts</h3>
+        <div class="shortcut-grid">
+          <span><kbd>Ctrl/Cmd+Enter</kbd></span><span>Run code</span>
+          <span><kbd>Ctrl/Cmd+S</kbd></span><span>Save locally</span>
+          <span><kbd>Ctrl/Cmd+H</kbd></span><span>Toggle help panel</span>
+        </div>
+      </div>
+
+      <button id="startCoding" class="primary-btn">Start Coding!</button>
+      <label class="checkbox-label">
+        <input type="checkbox" id="dontShowAgain"> Don't show this again
+      </label>
+    </div>
+  </div>
+
+  <!-- Syntax Help Panel -->
+  <div id="helpPanel" class="help-panel collapsed">
+    <div class="help-header">
+      <h3>📚 Syntax Quick Reference</h3>
+      <button id="closeHelp" class="icon-btn" title="Close help">✕</button>
+    </div>
+    <div class="help-content">
+      <div class="help-section">
+        <h4>Variables & Output</h4>
+        <code>Set name to "Alice"</code>
+        <code>Write "Hello, " + name</code>
+      </div>
+      
+      <div class="help-section">
+        <h4>Collections</h4>
+        <code>Set nums to Make a list of 1, 2, 3</code>
+        <code>Set data to Make a dictionary with "key" set to "value"</code>
+        <code>Write nums[0]  # Access by index</code>
+      </div>
+      
+      <div class="help-section">
+        <h4>Control Flow</h4>
+        <code>If x > 10<br>    Write "Big"<br>Else<br>    Write "Small"<br>End</code>
+        <code>Repeat 5 times<br>    Write "Hi"<br>End</code>
+      </div>
+      
+      <div class="help-section">
+        <h4>Functions</h4>
+        <code>Make greet with name<br>    Write "Hello, " + name<br>End<br>Use greet with "World"</code>
+      </div>
+      
+      <div class="help-section">
+        <h4>Operators</h4>
+        <code>a + b  or  a plus b</code>
+        <code>a * b  or  a times b</code>
+        <code>x > y  or  x is greater than y</code>
+      </div>
+
+      <div class="help-section">
+        <h4>Web Server</h4>
+        <code>Create web server on port 8080<br>Add route "/" with:<br>    Write html response "&lt;h1&gt;Hello!&lt;/h1&gt;"<br>Start server</code>
+      </div>
+    </div>
+  </div>
+
   <header>
-    <h1>PohLang Playground</h1>
+    <div class="header-left">
+      <h1>🌟 PohLang Playground</h1>
+      <button id="showWelcome" class="icon-btn" title="Show welcome screen">?</button>
+    </div>
     <div class="actions">
       <label>
         Example:
         <select id="examples"></select>
       </label>
-      <button id="loadExample">Load</button>
-      <button id="run">Run ▶</button>
+      <button id="loadExample" title="Load selected example">Load</button>
+      <label>
+        Mode:
+        <select id="mode">
+          <option value="run">Run</option>
+          <option value="bytecode">Bytecode</option>
+          <option value="disassemble">Disassemble</option>
+        </select>
+      </label>
+      <button id="run" class="primary-btn" title="Ctrl/Cmd+Enter">▶ Run</button>
+      <button id="toggleHelp" class="icon-btn" title="Toggle syntax help (Ctrl/Cmd+H)">📚</button>
+      <button id="copyOutput" title="Copy output to clipboard">📋 Copy</button>
+      <button id="reset" title="Reload example and discard edits">🔄 Reset</button>
+      <button id="download" title="Download current code as .poh">⬇️ Download</button>
     </div>
   </header>
 
   <main class="layout">
     <section class="editor-pane">
-      <textarea id="editor" spellcheck="false"></textarea>
+      <div class="editor-header">
+        <span class="editor-title">Editor</span>
+        <span class="editor-info" id="editorInfo"></span>
+      </div>
+      <textarea id="editor" spellcheck="false" placeholder="# Welcome! Start typing your PohLang code here...
+# Try: Write &quot;Hello, World!&quot;
+# Or load an example from the dropdown above"></textarea>
     </section>
     <section class="output-pane">
-      <h3>Output</h3>
-      <pre id="output"></pre>
+      <div class="output-head">
+        <h3>Output</h3>
+        <span id="status" class="status" aria-live="polite"></span>
+      </div>
+      <pre id="output" class="output-content"></pre>
       <h4>Errors</h4>
-      <pre id="errors"></pre>
+      <pre id="errors" class="error-content"></pre>
     </section>
   </main>
 
   <footer>
-    <span>Tip: set <code>POHLANG_BIN</code> env var if the CLI isn’t in PATH.</span>
+    <div class="footer-links">
+      <a href="https://github.com/pohlang" target="_blank">GitHub</a>
+      <span>•</span>
+      <a href="https://github.com/pohlang/PohLang/blob/main/doc/COMPLETE_GUIDE.md" target="_blank">Documentation</a>
+      <span>•</span>
+      <a href="https://github.com/pohlang/PohLang/blob/main/SYNTAX_GUIDE.md" target="_blank">Syntax Guide</a>
+      <span>•</span>
+      <span>Made with ❤️ by the PohLang Community</span>
+    </div>
   </footer>
 
   <script src="/main.js"></script>

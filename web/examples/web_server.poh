@@ -1,0 +1,41 @@
+# PohLang Web Server Example
+# A simple REST API server with routes
+
+Start Program
+
+# Create a web server
+Create web server on port 8080
+
+# Home route
+Add route "/" with:
+    Set html to "<html><head><title>PohLang API</title></head><body>"
+    Set html to html + "<h1>Welcome to PohLang API</h1>"
+    Set html to html + "<p>Try these endpoints:</p><ul>"
+    Set html to html + "<li>/api/hello</li>"
+    Set html to html + "<li>/api/time</li>"
+    Set html to html + "<li>/api/greet/:name</li>"
+    Set html to html + "</ul></body></html>"
+    Write html response html
+
+# API route - JSON response
+Add route "/api/hello" with:
+    Write json response with "message" set to "Hello from PohLang!" and "version" set to "1.0"
+
+# Route with path parameters
+Add route "/api/greet/:name" with:
+    Get the request
+    Set name to (Get path parameter "name")
+    Write json response with "greeting" set to "Hello, " + name + "!"
+
+# Current time route
+Add route "/api/time" with:
+    Set now to (Current time)
+    Write json response with "timestamp" set to now
+
+# Start the server
+Start server
+
+Write "Server running on http://localhost:8080"
+Write "Press Ctrl+C to stop"
+
+End Program

@@ -1,0 +1,7 @@
+# Ensure .poh files return as text/plain
+/examples/*.poh
+  Content-Type: text/plain; charset=utf-8
+
+# Prevent caching during dev
+/*
+  Cache-Control: no-store

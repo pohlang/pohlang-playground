@@ -1,0 +1,48 @@
+# PohLang Error Handling Example
+# How to handle errors gracefully
+
+Start Program
+
+Write "=== Example 1: Basic Try-Catch ==="
+
+Try:
+    Set result to 10 divided by 2
+    Write "10 / 2 = " + result
+    
+    # This will cause an error
+    Set bad_result to 10 divided by 0
+    Write "This will not print"
+Catch error:
+    Write "Error caught: Division by zero!"
+
+Write ""
+Write "=== Example 2: File Operations ==="
+
+Try:
+    # Attempting to read non-existent file
+    Read file from "nonexistent.txt"
+Catch error:
+    Write "File not found, using default data"
+    Set data to "default content"
+
+Write ""
+Write "=== Example 3: Validation ==="
+
+Make validate_age with age:
+    If age < 0 or age > 150:
+        Throw error "Invalid age: must be between 0 and 150"
+    Return age
+
+Try:
+    Set valid_age to validate_age with 25
+    Write "Valid age: " + valid_age
+    
+    # This will throw an error
+    Set invalid_age to validate_age with 200
+Catch error:
+    Write "Validation error caught!"
+
+Write ""
+Write "Program completed successfully"
+
+End Program

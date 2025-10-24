@@ -1,8 +1,14 @@
 [
+  "tutorial_basics.poh",
   "hello.poh",
   "calc.poh",
+  "functions.poh",
+  "control_flow.poh",
   "lists.poh",
   "dict.poh",
-  "functions.poh",
-  "control_flow.poh"
+  "data_processing.poh",
+  "classes.poh",
+  "error_handling.poh",
+  "file_operations.poh",
+  "web_server.poh"
 ]

@@ -1,0 +1,119 @@
+name: Deploy Runner to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'server/**'
+      - '.github/workflows/deploy-runner.yml'
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  SERVICE_NAME: pohlang-runner
+  REGION: us-central1
+
+jobs:
+  build-pohlang:
+    name: Build PohLang Binary
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PohLang Repository
+        uses: actions/checkout@v4
+        with:
+          repository: pohlang/PohLang
+          path: pohlang
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Build PohLang for Linux
+        run: |
+          cd pohlang/runtime
+          cargo build --release
+          strip target/release/pohlang || true
+          
+      - name: Upload Binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: pohlang-binary
+          path: pohlang/runtime/target/release/pohlang
+          retention-days: 1
+
+  deploy:
+    name: Deploy to Cloud Run
+    needs: build-pohlang
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Playground Repository
+        uses: actions/checkout@v4
+
+      - name: Download PohLang Binary
+        uses: actions/download-artifact@v4
+        with:
+          name: pohlang-binary
+          path: server/bin/
+
+      - name: Make Binary Executable
+        run: chmod +x server/bin/pohlang
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for GCR
+        run: gcloud auth configure-docker
+
+      - name: Build and Push Docker Image
+        run: |
+          cd server
+          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
+          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} \
+            --platform managed \
+            --region ${{ env.REGION }} \
+            --allow-unauthenticated \
+            --memory 512Mi \
+            --cpu 1 \
+            --timeout 30s \
+            --max-instances 10 \
+            --set-env-vars "POHLANG_BIN=/usr/local/bin/pohlang,NODE_ENV=production"
+
+      - name: Get Service URL
+        id: get-url
+        run: |
+          URL=$(gcloud run services describe ${{ env.SERVICE_NAME }} \
+            --platform managed \
+            --region ${{ env.REGION }} \
+            --format 'value(status.url)')
+          echo "url=$URL" >> $GITHUB_OUTPUT
+          echo "🚀 Runner deployed to: $URL"
+
+      - name: Create Deployment Summary
+        run: |
+          echo "## 🚀 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Service URL:** ${{ steps.get-url.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+          echo "1. Update Cloudflare Pages environment variable:" >> $GITHUB_STEP_SUMMARY
+          echo "   - RUNNER_ORIGIN = ${{ steps.get-url.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "2. Test health check: ${{ steps.get-url.outputs.url }}/api/health" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Test Command" >> $GITHUB_STEP_SUMMARY
+          echo '```bash' >> $GITHUB_STEP_SUMMARY
+          echo 'curl -X POST ${{ steps.get-url.outputs.url }}/api/run \' >> $GITHUB_STEP_SUMMARY
+          echo '  -H "Content-Type: application/json" \' >> $GITHUB_STEP_SUMMARY
+          echo '  -d '"'"'{"code":"Start Program\nWrite \"Hello from Cloud Run!\"\nEnd Program"}'"'"'' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

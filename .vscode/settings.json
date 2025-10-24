@@ -1,0 +1,20 @@
+{
+  "files.associations": {
+    ".dockerignore": "ignore",
+    "*.dockerignore": "ignore",
+    ".gitignore": "ignore",
+    "Dockerfile": "dockerfile",
+    "*.poh": "plaintext"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/*.log": true,
+    "gcp-key-*.json": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.cache": true
+  }
+}

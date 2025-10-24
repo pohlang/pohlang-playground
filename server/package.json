@@ -1,16 +1,26 @@
 {
-  "name": "pohlang-playground-server",
-  "version": "0.1.0",
+  "name": "pohlang-runner",
+  "version": "1.0.0",
+  "description": "Backend runner for PohLang Playground",
   "private": true,
   "main": "index.js",
   "type": "commonjs",
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "dev": "node index.js"
+    "dev": "node index.js",
+    "docker:build": "docker build -t pohlang-runner .",
+    "docker:run": "docker run -p 8080:8080 pohlang-runner"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.1.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }

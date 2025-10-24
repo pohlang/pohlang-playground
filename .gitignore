@@ -5,3 +5,21 @@ web/.cache/
 server/.cache/
 dist/
 .tmp/
+
+# GCP credentials (NEVER commit these!)
+gcp-key-*.json
+*-key.json
+service-account*.json
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Binary files (will be built in CI/CD)
+server/bin/pohlang
+server/bin/*.exe
+
+# Build artifacts
+*.vsix
+*.zip

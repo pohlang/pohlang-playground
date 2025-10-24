@@ -1,0 +1,58 @@
+# PohLang File Operations Example
+# Reading, writing, and manipulating files
+
+Start Program
+
+Write "=== File Writing ==="
+
+# Write to a file
+Set content to "Hello from PohLang!\nThis is line 2.\nThis is line 3."
+Write to file "test.txt" with content
+Write "Created test.txt"
+
+Write ""
+Write "=== File Reading ==="
+
+# Read the file back
+Set read_content to Read file from "test.txt"
+Write "File contents:"
+Write read_content
+
+Write ""
+Write "=== Line by Line Processing ==="
+
+# Read file lines
+Set lines to Read lines from "test.txt"
+Set line_count to count of lines
+
+Write "Total lines: " + line_count
+
+Set i to 0
+Repeat while i < line_count:
+    Write "Line " + (i + 1) + ": " + lines[i]
+    Set i to i + 1
+End
+
+Write ""
+Write "=== Append to File ==="
+
+# Append more content
+Append to file "test.txt" with "\nAppended line 4"
+Set updated to Read file from "test.txt"
+Write "Updated file:"
+Write updated
+
+Write ""
+Write "=== File Info ==="
+
+# Check if file exists
+If file exists "test.txt":
+    Write "test.txt exists"
+    Set size to file size of "test.txt"
+    Write "File size: " + size + " bytes"
+
+# Clean up
+Delete file "test.txt"
+Write "Cleaned up test.txt"
+
+End Program

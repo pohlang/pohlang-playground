@@ -1,0 +1,40 @@
+# PohLang Classes Example
+# Object-oriented programming with classes
+
+Start Program
+
+# Define a Person class
+Make class Person with:
+    # Constructor
+    Initialize with name and age:
+        Set self name to name
+        Set self age to age
+    
+    # Method to greet
+    Make greet:
+        Write "Hello, I am " + self name
+        Write "I am " + self age + " years old"
+    
+    # Method to celebrate birthday
+    Make birthday:
+        Set self age to self age + 1
+        Write self name + " is now " + self age + "!"
+
+# Create instances
+Set alice to Make Person with "Alice" and 30
+Set bob to Make Person with "Bob" and 25
+
+# Use methods
+Write "=== Alice ==="
+Use alice greet
+
+Write ""
+Write "=== Bob ==="
+Use bob greet
+
+Write ""
+Write "=== Birthday Time! ==="
+Use alice birthday
+Use bob birthday
+
+End Program

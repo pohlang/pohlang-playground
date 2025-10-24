@@ -1,0 +1,80 @@
+# Welcome to PohLang! 🎉
+# This tutorial covers the basics
+
+Start Program
+
+Write "=== 1. Hello World ==="
+Write "Hello, World!"
+
+Write ""
+Write "=== 2. Variables ==="
+# Variables store data
+Set name to "Alice"
+Set age to 30
+Set height to 5.6
+
+Write "Name: " + name
+Write "Age: " + age
+Write "Height: " + height
+
+Write ""
+Write "=== 3. Math Operations ==="
+# You can use symbols or natural language
+Set a to 10
+Set b to 5
+
+Write "a + b = " + (a + b)
+Write "a minus b = " + (a minus b)
+Write "a times b = " + (a times b)
+Write "a divided by b = " + (a divided by b)
+
+Write ""
+Write "=== 4. Conditions ==="
+Set score to 85
+
+If score >= 90:
+    Write "Grade: A"
+Else If score >= 80:
+    Write "Grade: B"
+Else If score >= 70:
+    Write "Grade: C"
+Else:
+    Write "Grade: F"
+
+Write ""
+Write "=== 5. Loops ==="
+Write "Counting to 5:"
+Set i to 1
+Repeat while i <= 5:
+    Write "  " + i
+    Set i to i + 1
+End
+
+Write ""
+Write "Or use repeat times:"
+Repeat 3 times:
+    Write "  Hello!"
+End
+
+Write ""
+Write "=== 6. Lists ==="
+# Lists store multiple values
+Set fruits to Make a list of "apple", "banana", "cherry"
+Write "Fruits: " + fruits
+Write "First fruit: " + fruits[0]
+Write "Last fruit: " + fruits[-1]
+
+Write ""
+Write "=== 7. Functions ==="
+# Functions are reusable blocks of code
+Make greet with name:
+    Write "Hello, " + name + "!"
+End
+
+Use greet with "Alice"
+Use greet with "Bob"
+
+Write ""
+Write "🎉 Tutorial complete! Try modifying this code."
+
+End Program

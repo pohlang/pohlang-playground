@@ -1,0 +1,82 @@
+# PohLang Data Processing Example
+# Working with collections and data transformations
+
+Start Program
+
+Write "=== Working with Lists ==="
+
+# Create a list of numbers
+Set numbers to Make a list of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+# Calculate statistics
+Set sum to total of numbers
+Set avg to sum divided by (count of numbers)
+Set max_val to largest in numbers
+Set min_val to smallest in numbers
+
+Write "Numbers: " + numbers
+Write "Sum: " + sum
+Write "Average: " + avg
+Write "Max: " + max_val
+Write "Min: " + min_val
+
+Write ""
+Write "=== Filtering Data ==="
+
+# Filter even numbers
+Set evens to Make a list of
+Set i to 0
+Repeat while i < count of numbers:
+    If numbers[i] % 2 equals 0:
+        Add numbers[i] to evens
+    Set i to i + 1
+End
+
+Write "Even numbers: " + evens
+
+Write ""
+Write "=== Data Transformation ==="
+
+# Square each number
+Set squares to Make a list of
+Set i to 0
+Repeat while i < count of numbers:
+    Set squared to numbers[i] times numbers[i]
+    Add squared to squares
+    Set i to i + 1
+End
+
+Write "Squares: " + squares
+
+Write ""
+Write "=== Working with Dictionaries ==="
+
+# Create student records
+Set students to Make a list of
+Add (Make a dictionary with "name" set to "Alice" and "grade" set to 95) to students
+Add (Make a dictionary with "name" set to "Bob" set to 87) to students
+Add (Make a dictionary with "name" set to "Carol" and "grade" set to 92) to students
+
+# Calculate average grade
+Set total_grade to 0
+Set i to 0
+Repeat while i < count of students:
+    Set student to students[i]
+    Set total_grade to total_grade + student["grade"]
+    Set i to i + 1
+End
+
+Set avg_grade to total_grade divided by (count of students)
+Write "Average grade: " + avg_grade
+
+Write ""
+Write "=== Student Report ==="
+
+Set i to 0
+Repeat while i < count of students:
+    Set student to students[i]
+    Write student["name"] + ": " + student["grade"]
+    Set i to i + 1
+End
+
+End Program
