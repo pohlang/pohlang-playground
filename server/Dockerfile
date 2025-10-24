@@ -1,7 +1,13 @@
 FROM node:18-alpine
 
 # Install dependencies for running compiled binaries
-RUN apk add --no-cache libc6-compat libgcc libstdc++
+# gcompat provides glibc compatibility for musl (Alpine)
+# Additional libraries needed for Rust binaries
+RUN apk add --no-cache \
+    libc6-compat \
+    libgcc \
+    libstdc++ \
+    gcompat
 
 WORKDIR /app
 
