@@ -363,7 +363,29 @@ We welcome contributions! Please:
 
 MIT License - see LICENSE file for details
 
-## 🔗 Links
+## � Universal Setup Guide
+
+**New to PohLang? Want to use it anywhere?**
+
+Check out our comprehensive [**UNIVERSAL_SETUP_GUIDE.md**](UNIVERSAL_SETUP_GUIDE.md) that covers:
+
+- ✨ **Online Playground** - Zero installation, start coding immediately
+- 💻 **VS Code Extension** - Full IDE experience with syntax highlighting and IntelliSense
+- 🚀 **PLHub CLI** - Complete project management, package manager, and build tools
+- ⚡ **Text Editor + CLI** - Use PohLang with Sublime, Atom, Kate, nano, vim, or any editor
+
+**Choose your path based on your needs:**
+
+| Environment | Best For | Install Time | Features |
+|------------|----------|--------------|----------|
+| Online Playground | First-time users, quick experiments | 0 minutes | Instant, no setup |
+| VS Code Extension | Daily development, larger projects | ~2 minutes | Full IDE, debugging |
+| PLHub CLI | Professional projects, team collaboration | ~3 minutes | Package management, builds |
+| Text Editor + CLI | Minimalist workflow, scripting | ~2 minutes | Lightweight, flexible |
+
+[**→ Read the Full Setup Guide**](UNIVERSAL_SETUP_GUIDE.md)
+
+## �🔗 Links
 
 - **PohLang Documentation**: [github.com/pohlang/PohLang/doc](https://github.com/pohlang/PohLang/tree/main/doc)
 - **Syntax Guide**: [SYNTAX_GUIDE.md](https://github.com/pohlang/PohLang/blob/main/SYNTAX_GUIDE.md)
