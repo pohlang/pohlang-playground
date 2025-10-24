@@ -1,82 +1,73 @@
 # PohLang Data Processing Example
-# Working with collections and data transformations
+# Working with collections and basic calculations
 
 Start Program
 
-Write "=== Working with Lists ==="
+Write "=== Working with Numbers ==="
 
-# Create a list of numbers
-Set numbers to Make a list of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-
-# Calculate statistics
-Set sum to total of numbers
-Set avg to sum divided by (count of numbers)
-Set max_val to largest in numbers
-Set min_val to smallest in numbers
+Set numbers to Make a list of 5, 12, 3, 8, 15, 7, 20, 4
 
 Write "Numbers: " + numbers
-Write "Sum: " + sum
-Write "Average: " + avg
-Write "Max: " + max_val
-Write "Min: " + min_val
+Write "Count: " + (count of numbers)
 
 Write ""
-Write "=== Filtering Data ==="
+Write "=== Accessing Values ==="
 
-# Filter even numbers
-Set evens to Make a list of
-Set i to 0
-Repeat while i < count of numbers:
-    If numbers[i] % 2 equals 0:
-        Add numbers[i] to evens
-    Set i to i + 1
-End
+Set first to numbers[0]
+Set second to numbers[1]
+Set last to numbers[7]
 
-Write "Even numbers: " + evens
+Write "First: " + first
+Write "Second: " + second
+Write "Last: " + last
 
 Write ""
-Write "=== Data Transformation ==="
+Write "=== Simple Calculations ==="
 
-# Square each number
-Set squares to Make a list of
-Set i to 0
-Repeat while i < count of numbers:
-    Set squared to numbers[i] times numbers[i]
-    Add squared to squares
-    Set i to i + 1
-End
+Set sum to first + second + last
+Write "Sum of three: " + sum
 
-Write "Squares: " + squares
+Set product to first * second
+Write "Product of first two: " + product
 
 Write ""
-Write "=== Working with Dictionaries ==="
+Write "=== Working with Student Data ==="
 
-# Create student records
-Set students to Make a list of
-Add (Make a dictionary with "name" set to "Alice" and "grade" set to 95) to students
-Add (Make a dictionary with "name" set to "Bob" set to 87) to students
-Add (Make a dictionary with "name" set to "Carol" and "grade" set to 92) to students
+Set alice to Make a dictionary with "name" set to "Alice", "grade" set to 95
+Set bob to Make a dictionary with "name" set to "Bob", "grade" set to 87
+Set carol to Make a dictionary with "name" set to "Carol", "grade" set to 92
 
-# Calculate average grade
-Set total_grade to 0
-Set i to 0
-Repeat while i < count of students:
-    Set student to students[i]
-    Set total_grade to total_grade + student["grade"]
-    Set i to i + 1
-End
+Set students to Make a list of alice, bob, carol
 
-Set avg_grade to total_grade divided by (count of students)
-Write "Average grade: " + avg_grade
+Write "Total students: " + (count of students)
 
 Write ""
 Write "=== Student Report ==="
 
 Set i to 0
-Repeat while i < count of students:
+Repeat 3 times
     Set student to students[i]
     Write student["name"] + ": " + student["grade"]
     Set i to i + 1
 End
+
+Write ""
+Write "=== Class Statistics ==="
+
+Set total to alice["grade"] + bob["grade"] + carol["grade"]
+Write "Total points: " + total
+
+Set class_avg to total / 3
+Write "Class average: " + class_avg
+
+Set highest to alice["grade"]
+If bob["grade"] > highest
+    Set highest to bob["grade"]
+End
+If carol["grade"] > highest
+    Set highest to carol["grade"]
+End
+
+Write "Highest grade: " + highest
 
 End Program

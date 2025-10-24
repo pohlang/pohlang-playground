@@ -1,40 +1,41 @@
-# PohLang Classes Example
-# Object-oriented programming with classes
+# PohLang Dictionary Example
+# Working with structured data using dictionaries
 
 Start Program
 
-# Define a Person class
-Make class Person with:
-    # Constructor
-    Initialize with name and age:
-        Set self name to name
-        Set self age to age
-    
-    # Method to greet
-    Make greet:
-        Write "Hello, I am " + self name
-        Write "I am " + self age + " years old"
-    
-    # Method to celebrate birthday
-    Make birthday:
-        Set self age to self age + 1
-        Write self name + " is now " + self age + "!"
+Write "=== Creating Person Records ==="
 
-# Create instances
-Set alice to Make Person with "Alice" and 30
-Set bob to Make Person with "Bob" and 25
+Set alice to Make a dictionary with "name" set to "Alice", "age" set to 30
+Set bob to Make a dictionary with "name" set to "Bob", "age" set to 25
 
-# Use methods
-Write "=== Alice ==="
-Use alice greet
+Write "Created two person records"
 
 Write ""
-Write "=== Bob ==="
-Use bob greet
+Write "=== Alice Info ==="
+Write "Name: " + alice["name"]
+Write "Age: " + alice["age"]
 
 Write ""
-Write "=== Birthday Time! ==="
-Use alice birthday
-Use bob birthday
+Write "=== Bob Info ==="
+Write "Name: " + bob["name"]
+Write "Age: " + bob["age"]
+
+Write ""
+Write "=== Comparing Ages ==="
+If alice["age"] > bob["age"]
+    Write alice["name"] + " is older"
+Otherwise
+    Write bob["name"] + " is older"
+End
+
+Write ""
+Write "=== List of People ==="
+Set people to Make a list of alice, bob
+Write "Total people: " + (count of people)
+
+Write ""
+Write "=== Accessing from List ==="
+Write "First person: " + people[0]["name"]
+Write "Second person: " + people[1]["name"]
 
 End Program

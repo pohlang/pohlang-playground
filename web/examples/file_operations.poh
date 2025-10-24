@@ -1,58 +1,58 @@
-# PohLang File Operations Example
-# Reading, writing, and manipulating files
+# PohLang String Operations Example
+# Working with text data
 
 Start Program
 
-Write "=== File Writing ==="
+Write "=== String Basics ==="
 
-# Write to a file
-Set content to "Hello from PohLang!\nThis is line 2.\nThis is line 3."
-Write to file "test.txt" with content
-Write "Created test.txt"
-
-Write ""
-Write "=== File Reading ==="
-
-# Read the file back
-Set read_content to Read file from "test.txt"
-Write "File contents:"
-Write read_content
+Set content to "Hello from PohLang!"
+Write "Content: " + content
+Write "Length: " + (count of content)
 
 Write ""
-Write "=== Line by Line Processing ==="
+Write "=== Multi-line Text ==="
 
-# Read file lines
-Set lines to Read lines from "test.txt"
+Set line1 to "This is line 1"
+Set line2 to "This is line 2"
+Set line3 to "This is line 3"
+
+Set lines to Make a list of line1, line2, line3
 Set line_count to count of lines
 
 Write "Total lines: " + line_count
 
 Set i to 0
-Repeat while i < line_count:
+Repeat 3 times
     Write "Line " + (i + 1) + ": " + lines[i]
     Set i to i + 1
 End
 
 Write ""
-Write "=== Append to File ==="
+Write "=== String Concatenation ==="
 
-# Append more content
-Append to file "test.txt" with "\nAppended line 4"
-Set updated to Read file from "test.txt"
-Write "Updated file:"
-Write updated
+Set first to "Hello"
+Set second to " World"
+Set combined to first + second
+Write "Combined: " + combined
 
 Write ""
-Write "=== File Info ==="
+Write "=== Building Text ==="
 
-# Check if file exists
-If file exists "test.txt":
-    Write "test.txt exists"
-    Set size to file size of "test.txt"
-    Write "File size: " + size + " bytes"
+Set text to "Start"
+Set text to text + " - Middle"
+Set text to text + " - End"
+Write "Built text: " + text
 
-# Clean up
-Delete file "test.txt"
-Write "Cleaned up test.txt"
+Write ""
+Write "=== Data Records ==="
+
+Set record to Make a dictionary with "filename" set to "test.txt", "size" set to 42, "exists" set to True
+
+Write "Filename: " + record["filename"]
+Write "Size: " + record["size"] + " bytes"
+Write "Exists: " + record["exists"]
+
+Write ""
+Write "Note: Full file I/O features are coming in future PohLang versions!"
 
 End Program
