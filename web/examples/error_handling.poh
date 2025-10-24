@@ -1,9 +1,7 @@
-# PohLang Input Validation Example
-# How to validate data and handle edge cases
-
 Start Program
 
-Write "=== Input Validation Examples ==="
+Write "=== PohLang Input Validation Example ==="
+Write "=== How to validate data and handle edge cases ==="
 Write ""
 
 # Example 1: Age Validation
@@ -90,14 +88,20 @@ Make calculate_grade with score
     End
     If score >= 90
         Return "A"
-    Else If score >= 80
-        Return "B"
-    Else If score >= 70
-        Return "C"
-    Else If score >= 60
-        Return "D"
-    Else
-        Return "F"
+    Otherwise
+        If score >= 80
+            Return "B"
+        Otherwise
+            If score >= 70
+                Return "C"
+            Otherwise
+                If score >= 60
+                    Return "D"
+                Otherwise
+                    Return "F"
+                End
+            End
+        End
     End
 End
 
