@@ -283,5 +283,7 @@ curl http://localhost:5173/api/examples/hello.poh
 ## License
 
 MIT License - see LICENSE file for details
+
 # Trigger deployment
 # Add repo permission
+# Add artifactregistry.repoAdmin permission
