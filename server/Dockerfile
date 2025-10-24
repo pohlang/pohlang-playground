@@ -34,8 +34,9 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD node -e "require('http').get('http://localhost:8080/api/health', (r) => {if (r.statusCode !== 200) throw new Error('Health check failed')})"
 
-# Run as non-root user
-RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
+# Run as non-root user (Debian syntax)
+RUN groupadd --gid 1001 nodejs && \
+    useradd --uid 1001 --gid nodejs --shell /bin/bash --create-home nodejs
 USER nodejs
 
 # Start application
