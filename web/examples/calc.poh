@@ -1,0 +1,5 @@
+Start Program
+Set a to 10
+Set b to 5
+Write (a + b) times 2
+End Program

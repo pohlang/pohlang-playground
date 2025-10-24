@@ -1,0 +1,6 @@
+Start Program
+Make greet with name
+    Write """Hello, """ + name
+End
+Use greet with """World"""
+End Program

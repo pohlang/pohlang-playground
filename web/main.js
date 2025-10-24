@@ -12,23 +12,46 @@ async function fetchJSON(url, opts) {
 }
 
 async function loadExamples() {
+  examplesSel.innerHTML = '';
+  // Try API first (Node server), then fall back to static list for Cloudflare Pages
   try {
     const data = await fetchJSON('/api/examples');
-    examplesSel.innerHTML = '';
-    data.files.forEach(f => {
+    (data.files || []).forEach(f => {
+      const opt = document.createElement('option');
+      opt.value = f; opt.textContent = f; examplesSel.appendChild(opt);
+    });
+    if (examplesSel.options.length > 0) return;
+  } catch (_) {}
+
+  // Fallback: load static index from /examples/index.json
+  try {
+    const res = await fetch('/examples/index.json');
+    if (!res.ok) throw new Error('no static examples index');
+    const files = await res.json();
+    (files || []).forEach(f => {
       const opt = document.createElement('option');
       opt.value = f; opt.textContent = f; examplesSel.appendChild(opt);
     });
   } catch (e) {
-    console.error(e);
+    console.error('Failed to load examples', e);
   }
 }
 
 async function loadSelected() {
   const name = examplesSel.value;
   if (!name) return;
-  const res = await fetch(/api/examples/);
-  editorEl.value = await res.text();
+  // Prefer API; fallback to static asset
+  try {
+    const res = await fetch(/api/examples/);
+    if (res.ok) {
+      editorEl.value = await res.text();
+    } else {
+      throw new Error('api not available');
+    }
+  } catch (_) {
+    const res2 = await fetch(/examples/);
+    editorEl.value = await res2.text();
+  }
   outEl.textContent = '';
   errEl.textContent = '';
 }
@@ -47,8 +70,9 @@ async function runCode() {
     outEl.textContent = data.stdout || '';
     errEl.textContent = (data.stderr || '') + (data.ok ? '' : ('\n' + (data.error || '')));
   } catch (e) {
+    // Likely no API in Cloudflare Pages unless RUNNER_ORIGIN is configured.
     outEl.textContent = '';
-    errEl.textContent = String(e);
+    errEl.textContent = 'Runner not available. Configure Cloudflare Pages Functions RUNNER_ORIGIN or run the local server.\n\n' + String(e);
   }
 }
 
