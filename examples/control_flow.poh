@@ -1,0 +1,9 @@
+Start Program
+Set x to 3
+If x is less than 5
+    Write """x is small"""
+End
+Repeat 3 times
+    Write """loop"""
+End
+End Program

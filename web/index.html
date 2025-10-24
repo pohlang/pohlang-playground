@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PohLang Playground</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+  <header>
+    <h1>PohLang Playground</h1>
+    <div class="actions">
+      <label>
+        Example:
+        <select id="examples"></select>
+      </label>
+      <button id="loadExample">Load</button>
+      <button id="run">Run ▶</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="editor-pane">
+      <textarea id="editor" spellcheck="false"></textarea>
+    </section>
+    <section class="output-pane">
+      <h3>Output</h3>
+      <pre id="output"></pre>
+      <h4>Errors</h4>
+      <pre id="errors"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <span>Tip: set <code>POHLANG_BIN</code> env var if the CLI isn’t in PATH.</span>
+  </footer>
+
+  <script src="/main.js"></script>
+</body>
+</html>

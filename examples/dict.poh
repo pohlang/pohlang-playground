@@ -1,0 +1,4 @@
+Start Program
+Set person to Make a dictionary with """name""" set to """Alice""", """age""" set to 30
+Write person["""name"""]
+End Program

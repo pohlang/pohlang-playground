@@ -1,0 +1,5 @@
+Start Program
+Set nums to Make a list of 1, 2, 3, 4
+Write nums[0]
+Write nums[-1]
+End Program
