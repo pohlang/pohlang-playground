@@ -3,11 +3,16 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'web/**'
+      - '.github/workflows/cloudflare-pages.yml'
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Only run if Cloudflare secrets are configured
+    if: ${{ secrets.CF_API_TOKEN != '' && secrets.CF_ACCOUNT_ID != '' }}
     permissions:
       contents: read
       deployments: write

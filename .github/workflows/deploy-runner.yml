@@ -33,7 +33,8 @@ jobs:
       - name: Build PohLang for Linux
         run: |
           cd pohlang/runtime
-          cargo build --release
+          # Allow warnings during build (PohLang may have unused code in development)
+          RUSTFLAGS="-A unused-imports -A unused-variables -A dead-code -A unused-assignments" cargo build --release
           strip target/release/pohlang || true
           
       - name: Upload Binary
