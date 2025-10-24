@@ -1,13 +1,10 @@
-FROM node:18-alpine
+# Use Debian-based Node image for full glibc compatibility
+FROM node:18-slim
 
-# Install dependencies for running compiled binaries
-# gcompat provides glibc compatibility for musl (Alpine)
-# Additional libraries needed for Rust binaries
-RUN apk add --no-cache \
-    libc6-compat \
-    libgcc \
-    libstdc++ \
-    gcompat
+# Install necessary runtime dependencies
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
