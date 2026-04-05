@@ -6,6 +6,7 @@
   <title>PohLang Playground - Learn Natural Language Programming</title>
   <meta name="description" content="Interactive playground for PohLang - a programming language that reads like natural English. Learn, experiment, and build with intuitive syntax.">
   <link rel="stylesheet" href="/styles.css"/>
+  <link rel="stylesheet" href="/quiz.css"/>
 </head>
 <body>
   <!-- Welcome Modal -->
@@ -99,7 +100,7 @@
       <h1>🌟 PohLang Playground</h1>
       <button id="showWelcome" class="icon-btn" title="Show welcome screen">?</button>
     </div>
-    <div class="actions">
+    <div class="actions" id="playgroundActions">
       <label>
         Example:
         <select id="examples"></select>
@@ -121,26 +122,46 @@
     </div>
   </header>
 
-  <main class="layout">
-    <section class="editor-pane">
-      <div class="editor-header">
-        <span class="editor-title">Editor</span>
-        <span class="editor-info" id="editorInfo"></span>
-      </div>
-      <textarea id="editor" spellcheck="false" placeholder="# Welcome! Start typing your PohLang code here...
+  <!-- Tab Navigation -->
+  <nav class="tab-nav" role="tablist">
+    <button class="nav-tab active" data-tab="playground" role="tab" aria-selected="true">🖊️ Playground</button>
+    <button class="nav-tab" data-tab="quiz" role="tab" aria-selected="false">🧠 Quiz</button>
+    <button class="nav-tab" data-tab="challenges" role="tab" aria-selected="false">🎯 Challenges</button>
+  </nav>
+
+  <!-- ── Playground panel ─────────────────────────────────────────────── -->
+  <div id="panel-playground" class="tab-panel active">
+    <main class="layout">
+      <section class="editor-pane">
+        <div class="editor-header">
+          <span class="editor-title">Editor</span>
+          <span class="editor-info" id="editorInfo"></span>
+        </div>
+        <textarea id="editor" spellcheck="false" placeholder="# Welcome! Start typing your PohLang code here...
 # Try: Write &quot;Hello, World!&quot;
 # Or load an example from the dropdown above"></textarea>
-    </section>
-    <section class="output-pane">
-      <div class="output-head">
-        <h3>Output</h3>
-        <span id="status" class="status" aria-live="polite"></span>
-      </div>
-      <pre id="output" class="output-content"></pre>
-      <h4>Errors</h4>
-      <pre id="errors" class="error-content"></pre>
-    </section>
-  </main>
+      </section>
+      <section class="output-pane">
+        <div class="output-head">
+          <h3>Output</h3>
+          <span id="status" class="status" aria-live="polite"></span>
+        </div>
+        <pre id="output" class="output-content"></pre>
+        <h4>Errors</h4>
+        <pre id="errors" class="error-content"></pre>
+      </section>
+    </main>
+  </div>
+
+  <!-- ── Quiz panel ───────────────────────────────────────────────────── -->
+  <div id="panel-quiz" class="tab-panel">
+    <div id="quizContainer" class="quiz-wrapper"></div>
+  </div>
+
+  <!-- ── Challenges panel ─────────────────────────────────────────────── -->
+  <div id="panel-challenges" class="tab-panel">
+    <div id="challengesContainer" class="challenges-wrapper"></div>
+  </div>
 
   <footer>
     <div class="footer-links">
@@ -155,5 +176,6 @@
   </footer>
 
   <script src="/main.js"></script>
+  <script src="/quiz.js"></script>
 </body>
 </html>
