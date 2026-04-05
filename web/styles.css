@@ -124,7 +124,7 @@ select:hover, select:focus {
   display: grid; 
   grid-template-columns: 1fr 1fr; 
   gap: 0; 
-  height: calc(100vh - 110px);
+  height: calc(100vh - 154px);
   position: relative;
 }
 
@@ -388,9 +388,9 @@ kbd {
 .help-panel {
   position: fixed;
   right: 0;
-  top: 72px;
+  top: 116px;
   width: 320px;
-  height: calc(100vh - 122px);
+  height: calc(100vh - 166px);
   background: var(--panel);
   border-left: 2px solid var(--border);
   box-shadow: -4px 0 12px rgba(0,0,0,0.3);
@@ -450,8 +450,59 @@ kbd {
   white-space: pre;
 }
 
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  gap: 0;
+  background: var(--panel);
+  border-bottom: 2px solid var(--border);
+  padding: 0 16px;
+}
+
+.nav-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  transform: none;
+}
+
+.nav-tab:hover {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--border);
+  transform: none;
+}
+
+.nav-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  background: transparent;
+}
+
+/* Tab panels */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
 /* Responsive */
-@media (max-width: 1200px) {
+@media (max-width: 600px) {
+  .nav-tab {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
   .help-panel {
     width: 280px;
   }
